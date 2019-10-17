@@ -80,6 +80,7 @@ chrome.browserAction.onClicked.addListener(function () {
 
     function processCommand(transcript) { 
       transcript = transcript.toLowerCase();
+      
       // Navigate to a webpage
       if (transcript.indexOf('go to') === 0) {
         let targetUrl = transcript.slice(6);
@@ -97,7 +98,59 @@ chrome.browserAction.onClicked.addListener(function () {
         chrome.tabs.create({url: 'https://www.google.com/search?q=' + targetUrl});
       }
 
-      //
+      // Shop
+      if (transcript.indexOf('shop for') === 0) {
+        let targetUrl = transcript.slice(9);
+        targetUrl = targetUrl.split(' ').join('+');
+        chrome.tabs.create({url: 'https://www.amazon.com/s?k=' + targetUrl});
+      }
+
+      // Play
+      if (transcript.indexOf('play') === 0) {
+        let targetUrl = transcript.slice(5);
+        targetUrl = targetUrl.split(' ').join('+');
+        chrome.tabs.create({url: 'https://www.youtube.com/results?search_query=' + targetUrl});
+      }
+
+      if (transcript.indexOf('youtube') === 0) {
+        let targetUrl = transcript.slice(8);
+        targetUrl = targetUrl.split(' ').join('+');
+        chrome.tabs.create({url: 'https://www.youtube.com/results?search_query=' + targetUrl});
+      }
+
+      //check email 
+      if (transcript.indexOf('check email') === 0) {
+        chrome.tabs.create({url: 'https://www.gmail.com'});
+      }
+
+      //open calendar / schedule
+      if (transcript.indexOf('calendar') === 0 || transcript.indexOf('schedule') === 0) {
+        chrome.tabs.create({url: 'https://calendar.google.com/calendar/r'});
+      }
+      //open google maps 
+      if (transcript.indexOf('where is') === 0) {
+        let targetUrl = transcript.slice(9);
+        targetUrl = targetUrl.split(' ').join('+');
+        chrome.tabs.create({url: 'https://www.google.com/maps/search/?api=1&query=' + targetUrl});
+      }
+
+      // Go to link
+      
+    //   if (transcript.indexOf('open') === 0) {
+    //     let allLinks = document.links;
+    //     console.log(allLinks);
+    //     let targetUrl = transcript.slice(5);
+    //     console.log(targetUrl);
+    //   for (let i = 0; i < allLinks.length; i++) {
+    //     if (allLinks[i].text.split(' ')[0] === targetUrl.split(' ')[0]) {
+    //       console.log(allLinks[i].text.split(' ')[0]);
+    //       console.log(targetUrl.split(' ')[0]);
+    //       chrome.tabs.create({url: allLinks[i].href});
+    //       console.log(allLinks[i].href);
+
+    //     }
+    //   }
+    // }
     }
 
     

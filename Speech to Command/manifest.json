@@ -1,0 +1,20 @@
+{
+  "name": "TT Extension",
+  "version": "1.0",
+  "description": "Speech to Command Extension!",
+  "permissions": ["storage"],
+  "background": {
+      "page": "popup.html",
+      "persistent": false
+  },
+  "browser_action": {
+      "default_icon": {
+          "32": "Images/Nav3.png"
+      },
+      "default_title": "Transcript"
+  },
+  "manifest_version": 2
+}
+
+
+

@@ -2,7 +2,11 @@
   "name": "TT Extension",
   "version": "1.0",
   "description": "Speech to Command Extension!",
-  "permissions": ["storage"],
+  "permissions": ["storage", "activeTab", "<all_urls>", "tabs"],
+  "content_scripts": [{
+      "matches": ["http://*/*", "https://*/*", "<all_urls>"],
+      "js": ["helper.js"    ]
+  }],
   "background": {
       "page": "popup.html",
       "persistent": false
@@ -16,3 +20,4 @@
 
 
 
+    

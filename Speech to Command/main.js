@@ -52,19 +52,18 @@ recognition.onerror = function(event) {
 }
 
 let recording = false;
-// console.log(recording);
 
 chrome.browserAction.onClicked.addListener(function () {
       if (!recording) {
-        // chrome.tabs.create({url: 'http://www.google.com'});
         recording = true;
         recognition.start();
+        chrome.browserAction.setBadgeText({text: "R"});
         console.log(recording);
       } 
       else {
         recording = false;
         recognition.stop();
-        // alert(transcript);
+        chrome.browserAction.setBadgeText({text: ""});
         console.log(recording);
       }
     });
@@ -72,18 +71,33 @@ chrome.browserAction.onClicked.addListener(function () {
     let allTargets = {
       'google': 'http://www.google.com',
       'facebook': 'http://www.facebook.com',
-      'youtube': 'http://www.youtube.com'
+      'youtube': 'http://www.youtube.com',
+      'codesmith': 'https://codesmith.io',
+      'espn': 'https://www.espn.com/',
+      'twitter': 'https://twitter.com/home',
+      'instagram': 'https://www.instagram.com/'
     }
 
     function processCommand(transcript) { 
       transcript = transcript.toLowerCase();
-      console.log(transcript);
+      // Navigate to a webpage
       if (transcript.indexOf('go to') === 0) {
-  
         let targetUrl = transcript.slice(6);
-        console.log(targetUrl);
-        chrome.tabs.create({url: allTargets[targetUrl]});
+        if (allTargets[targetUrl]) {
+          chrome.tabs.create({url: allTargets[targetUrl]});
+        } else {
+          chrome.tabs.create({url: 'http://www.' + targetUrl + '.com'});
+        }
+      } 
+
+      // Search/Google keyword
+      if (transcript.indexOf('google') === 0 || transcript.indexOf('search') === 0) {
+        let targetUrl = transcript.slice(7);
+        targetUrl = targetUrl.split(' ').join('+');
+        chrome.tabs.create({url: 'https://www.google.com/search?q=' + targetUrl});
       }
+
+      //
     }
 
     

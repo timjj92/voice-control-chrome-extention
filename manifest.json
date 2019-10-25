@@ -5,10 +5,10 @@
   "permissions": ["storage", "activeTab", "<all_urls>", "tabs"],
   "content_scripts": [{
       "matches": ["http://*/*", "https://*/*", "<all_urls>"],
-      "js": ["helper.js"    ]
+      "js": ["helper.js"]
   }],
   "background": {
-      "page": "popup.html",
+      "page": "background.html",
       "persistent": false
   },
   "browser_action": {
